@@ -1,11 +1,16 @@
 const express = require('express');
 const app = express()
 require('./modals/index')
+// require('./mail')
+app.use(express.json());
+app.use(express.urlencoded({
+    extended:true
+}))
 let userctrl = require('./controllers/userController')
 app.get('/',(req,res)=>{
     res.send('Hello Express')
 })
-app.get("/add",userctrl.addUser);
+app.post("/add",userctrl.addUser);
 app.get("/crud",userctrl.crudOp);
 app.get('/help',(req,res)=>{
     res.send('<h1>Help page</h1>')
